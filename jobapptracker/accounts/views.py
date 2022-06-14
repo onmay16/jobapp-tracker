@@ -1,5 +1,7 @@
 import json
 import os
+from decouple import config
+
 from django.shortcuts import render, redirect
 
 from rest_framework.permissions import IsAuthenticated
@@ -7,10 +9,10 @@ from rest_framework.decorators import permission_classes
 
 from application.models import Application
 
-credential_file = os.path.join(os.path.dirname(__file__), '../settings/client_secret.json')
-credentials = json.load((open(credential_file)))
+# credential_file = os.path.join(os.path.dirname(__file__), '../settings/client_secret.json')
+# credentials = json.load((open(credential_file)))
 
-client_id = credentials['web']['client_id']
+client_id = config('client_id')
 api_url = 'https://accounts.google.com/o/oauth2/v2/auth?access_type=offline&include_granted_scopes=true&response_type=code&state=state_parameter_passthrough_value&redirect_uri=http://localhost:8000&client_id=' + client_id
 
 
