@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>profile-page-edit</title>
+    <link rel="stylesheet" href="{% static 'css/navigation.css' %}">
+    <!-- boxicon -->
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        .a2 {
+            font-size: 20px;
+            text-decoration: none;
+
+        }
+
+        H3 {
+            margin: 20px auto;
+            width: 400px;
+            height: 30px;
+            background-color: turquoise;
+            text-align: center;
+            color: white;
+        }
+
+        .ix {
+            float: left;
+        }
+
+        .a3 {
+            font-size: 20px;
+            margin-top: 60px;
+            margin-left: 10px;
+
+        }
+
+        .JA {
+            font-size: 20px;
+            margin-left: 300px;
+            margin-top: 60px;
+            width: 100px;
+            height: 100px;
+            background-color: white;
+            text-align: center;
+            float: left;
+            border: solid turquoise;
+
+        }
+
+        .Int {
+            font-size: 20px;
+            margin-top: 60px;
+            margin-left: 150px;
+            width: 100px;
+            height: 100px;
+            background-color: white;
+            text-align: center;
+            float: left;
+            border: solid turquoise;
+
+        }
+
+        .JO {
+            font-size: 20px;
+            margin-top: 60px;
+            margin-left: 150px;
+            width: 100px;
+            height: 100px;
+            background-color: white;
+            text-align: center;
+            float: left;
+            border: solid turquoise;
+
+        }
+
+        .upload {
+            margin-left: 280px;
+
+        }
+
+        .button {
+            margin-top: 30px;
+        }
+
+        .form-content {
+            margin-left: 150px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="logo_content">
+            <div class="logo">
+                <i class='bx bx-search-alt'></i>
+                <div class="logo_name">JobTrackerApp</div>
+            </div>
+            <i class='bx bx-menu' id="btn"></i>
+        </div>
+        <ul class="nav_list">
+            <li>
+                <a href="{% url 'home' %}">
+                    <i class='bx bx-home-alt-2'></i>
+                    <span class="links_name">Homepage</span>
+                </a>
+                <span class="tooltip">Homepage</span>
+            </li>
+
+
+            <li>
+                <a href="{% url 'profile' %}">
+                    <i class='bx bx-user'></i>
+                    <span class="links_name">Profile</span>
+                </a>
+                <span class="tooltip">Profile</span>
+            </li>
+
+            <li>
+                <a href="{% url 'trackerboard' %}">
+                    <i class='bx bx-chalkboard'></i>
+                    <span class="links_name"> Tracker Board</span>
+
+                </a>
+                <span class="tooltip">Tracker Board</span>
+            </li>
+
+
+            <li>
+                <a href="{% url 'logout' %}">
+                    <i class='bx bx-log-out'></i>
+                    <span class="links_name">Sign out</span>
+                </a>
+                <span class="tooltip">Sign out</span>
+            </li>
+
+            <li>
+                <a href="{% url 'edit_view' %}">
+                    <i class='bx bx-cog'></i>
+                    <span class="links_name">Profile edit</span>
+                </a>
+                <span class="tooltip">Profile edit</span>
+            </li>
+
+
+
+        </ul>
+    </div>
+
+    <script>
+        let btn = document.querySelector("#btn");
+        let sidebar = document.querySelector(".sidebar");
+
+        btn.onclick = function () {
+            sidebar.classList.toggle("active");
+        }
+
+
+    </script>
+    <div>
+        <h3>Edit Application</h3>
+
+        <form class="form-content" action="{% url 'editjob' application.id %}" method="post">
+            {% csrf_token %}
+            <p>
+                <label for="position"><b>Position:&nbsp </b></label>
+                <input type="text" name="position" id="position" class="position" size="48" value="{{ application.position }}">
+            </p>
+            
+            <p>
+                <label for="company"><b>Company:&nbsp</b></label>
+                <input type="text" name="company" id="company" class="company" size="45" value="{{ application.company }}">
+            </p>
+            
+            <p>
+                <label for="location"><b>Location:&nbsp</b></label>
+                <input type="text" name="location" id="location" class="location" size="47" value="{{ application.location }}">
+            </p>
+            
+            <p>
+                <label for="company_email"><b>Company email:&nbsp</b></label>
+                <input type="text" name="company_email" id="company_email" class="company_email" size="35" value="{{ application.company_email }}">
+            </p>
+
+            <p>
+                <label for="status"><b>Status:&nbsp</b></label>
+                <select name="status" id="status">
+                    {% for s in status %}
+                        {% if s == application.status %}
+                            <option value={{s}} selected>{{s}}</option>
+                        {% else %}
+                            <option value={{s}}>{{s}}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </p>
+            
+            <p>
+                <label for="job_post"><b>Job posting URL:&nbsp</b></label>
+                <input type="text" name="job_post" id="job_post" class="job_post" size="35" value="{{ application.job_post }}">
+            </p>
+            
+            <p>
+                <label for="note"><b>Note:&nbsp</b></label>
+                <input type="text" name="note" id="note" class="note" size="53" value="{{ application.note }}">
+            </p>
+            
+            <input type="submit" value="Save">
+        </form>
+    </div>
+
+</body>
+</html>

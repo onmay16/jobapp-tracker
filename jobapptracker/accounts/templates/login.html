@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
+    <title>Login</title>
+
+</head>
+
+<body>
+    <div class="login">
+        <h1>User Login</h2>
+            <form>
+                <div class="login_box">
+                    <!-- required:can't be null -->
+                    <input type="text" required />
+                    <label>UserName/Email</label>
+                </div>
+                <div class="login_box">
+                    <input type="password" required>
+                    <label>Password</label>
+                </div>
+                <button class="btn">Login</button>
+                <p class="text">Need an new account? <a href="#">Sign Up!</a></p>
+                <br>
+                <a href="{% url 'google_login' %}">
+                    <button type="button" class="login-with-google-btn">
+                        Sign in with Google
+                    </button>
+                </a>
+
+
+            </form>
+
+    </div>
+
+
+
+</body>
+
+</html>

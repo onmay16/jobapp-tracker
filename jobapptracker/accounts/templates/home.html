@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>trackerboard</title>
+    <link rel="stylesheet" href="{% static 'css/navigation.css' %}">
+    <!-- boxicon -->
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        .a2 {
+            font-size: 20px;
+            text-decoration: none;
+
+        }
+
+        H3 {
+            margin: 20px auto;
+            width: 400px;
+            height: 30px;
+            background-color: turquoise;
+            text-align: center;
+            color: white;
+        }
+
+        .ix {
+            float: left;
+        }
+
+        .a3 {
+            font-size: 20px;
+            margin-top: 60px;
+            margin-left: 10px;
+
+        }
+
+        .Int {
+            font-size: 20px;
+            margin-top: 60px;
+            margin-left: 150px;
+            width: 100px;
+            height: 100px;
+            background-color: white;
+            text-align: center;
+            float: left;
+            border: solid turquoise;
+
+        }
+
+        .box {
+            font-size: 20px;
+            margin-top: 60px;
+            margin-left: 150px;
+            width: 900px;
+            height: fit-content;
+            background-color: white;
+            float: left;
+            border: solid turquoise;
+
+        }
+
+        .greet, .message {
+            margin-left: 150px;
+        }
+
+        h4 {
+            margin-left: 150px;
+        }
+
+        .url {
+            margin-top: 2x;
+            margin-left: 150px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo_content">
+            <div class="logo">
+                <i class='bx bx-search-alt'></i>
+                <div class="logo_name">JobTrackerApp</div>
+            </div>
+            <i class='bx bx-menu' id="btn"></i>
+        </div>
+        <ul class="nav_list">
+            <li>
+                <a href="{% url 'home' %}">
+                    <i class='bx bx-home-alt-2'></i>
+                    <span class="links_name">Homepage</span>
+                </a>
+                <span class="tooltip">Homepage</span>
+            </li>
+
+
+            <li>
+                <a href="{% url 'profile' %}">
+                    <i class='bx bx-user'></i>
+                    <span class="links_name">Profile</span>
+                </a>
+                <span class="tooltip">Profile</span>
+            </li>
+
+            <li>
+                <a href="{% url 'trackerboard' %}">
+                    <i class='bx bx-chalkboard'></i>
+                    <span class="links_name"> Tracker Board</span>
+
+                </a>
+                <span class="tooltip">Tracker Board</span>
+            </li>
+
+
+            <li>
+                <a href="{% url 'logout' %}">
+                    <i class='bx bx-log-out'></i>
+                    <span class="links_name">Sign out</span>
+                </a>
+                <span class="tooltip">Sign out</span>
+            </li>
+
+            <li>
+                <a href="{% url 'edit_view' %}">
+                    <i class='bx bx-cog'></i>
+                    <span class="links_name">Profile edit</span>
+                </a>
+                <span class="tooltip">Profile edit</span>
+            </li>
+
+
+
+        </ul>
+    </div>
+
+    <script>
+        let btn = document.querySelector("#btn");
+        let sidebar = document.querySelector(".sidebar");
+
+        btn.onclick = function () {
+            sidebar.classList.toggle("active");
+        }
+    </script>
+
+    <h3>Job Application Tracker</h3>
+    <h4 class="greet"> Hello, {{ user.first_name }}! </h4>
+    {% if q %}
+        <div class="message"><a href="http://gmail.com/#search/{{q}}" target="_blank">{{ message }}</a></div>
+    {% else %}
+        <div class="message">{{ message }}</div>
+    {% endif %}
+    <br>
+    <h4>Do you have a new application?</h4>
+    <form action="{% url 'addjob' %}" method="post">
+        {% csrf_token %}
+        <input class="url" id="url" name="url" type="text" size="100" value="Please put the job description URL from LinkedIn!" />
+    <input type="submit" value="Save">
+    </form>
+    
+
+
+</body>
+
+</html>
