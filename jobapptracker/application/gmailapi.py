@@ -1,14 +1,8 @@
-from django.http import HttpResponse, JsonResponse
+from decouple import config
 
-from rest_framework.parsers import JSONParser
-
-from googleapiclient.errors import HttpError
-from google.cloud import pubsub_v1
-
-from settings import credentials
 from .services import gmail_authenticate
 
-API_KEY = credentials.GOOGLE_API_KEY
+API_KEY = config('GOOGLE_API_KEY')
 
 def get_new_mails(q):
     service = gmail_authenticate()
