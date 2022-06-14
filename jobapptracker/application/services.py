@@ -2,16 +2,9 @@ import requests, re, os.path, pickle
 
 from bs4 import BeautifulSoup
 
-from django.http import JsonResponse
-from django.core.exceptions import ValidationError
-from settings import credentials
-
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
-from google.oauth2.credentials import Credentials
-from googleapiclient import errors
-from email.message import EmailMessage
 
 
 def linkedin_job_scrape(url):
