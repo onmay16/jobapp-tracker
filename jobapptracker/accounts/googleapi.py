@@ -1,9 +1,10 @@
-from django.forms import ValidationError
 import requests
+from decouple import config
 
 from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.contrib.auth import login, logout
+from django.forms import ValidationError
 
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
@@ -21,9 +22,9 @@ from .models import User
 
 BASE_URL = 'http://localhost:8000/'
 GOOGLE_CALLBACK_URI = BASE_URL + 'accounts/google/callback/'
-client_id = credentials.GOOGLE_OAUTH2_CLIENT_ID
-client_secret = credentials.GOOGLE_OAUTH2_CLIENT_SECRET
-state = credentials.STATE
+client_id = config('client_id')
+client_secret = config('client_secret')
+state = config('STATE')
 
 def google_login(request):
     scope = "https://www.googleapis.com/auth/userinfo.email " + "https://www.googleapis.com/auth/userinfo.profile"
