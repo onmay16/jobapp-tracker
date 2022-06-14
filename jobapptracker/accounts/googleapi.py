@@ -17,7 +17,6 @@ from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 
 from json.decoder import JSONDecodeError
 
-from settings import credentials
 from .models import User
 
 BASE_URL = 'http://localhost:8000/'
